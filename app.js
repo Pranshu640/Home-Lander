@@ -37,20 +37,19 @@ main().then(() => {
     console.log(err);
 })
 
-const store = MongoStore.create({
-    mongoUrl : dbUrl,
-    crypto : {
-        secret :process.env.SECRET,
-    },
-    touchAfter : 24 * 60 * 60,
-});
+// const store = MongoStore.create({
+//     mongoUrl : dbUrl,
+//     crypto : {
+//         secret :process.env.SECRET,
+//     },
+//     touchAfter : 24 * 60 * 60,
+// });
 
-store.on("error" , (err) => {
-    console.log("Error in mongo session store" , err);
-})
+// store.on("error" , (err) => {
+//     console.log("Error in mongo session store" , err);
+// })
 
 const sessionOptions = {
-    store ,
     secret : process.env.SECRET,
     resave : false,
     saveUninitialized : true,
