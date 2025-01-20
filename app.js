@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsmate = require("ejs-mate");
+const helmet = require('helmet');
 
 const ExpressError = require("./utils/ExpressError.js");
 const listingRouter = require("./routes/listing.js");
@@ -28,6 +29,14 @@ app.engine("ejs" , ejsmate);
 app.use(express.static(path.join(__dirname , "/public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+
+app.use(
+    helmet({
+        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false,
+    })
+);
 
 const dbUrl = process.env.ATLASDB_URL;
 
@@ -37,28 +46,28 @@ main().then(() => {
     console.log(err);
 })
 
-// const store = MongoStore.create({
-//     mongoUrl : dbUrl,
-//     crypto : {
-//         secret :process.env.SECRET,
-//     },
-//     touchAfter : 24 * 60 * 60,
-// });
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    secret: process.env.SECRET,
+    touchAfter: 24 * 60 * 60
+});
 
-// store.on("error" , (err) => {
-//     console.log("Error in mongo session store" , err);
-// })
+store.on("error", (err) => {
+    console.log("Error in mongo session store", err);
+});
 
 const sessionOptions = {
-    secret : process.env.SECRET,
-    resave : false,
-    saveUninitialized : true,
-    cookie : {
-        maxAge :  1000*60*60*24*7,
-        httpOnly : true,
+    store,
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: 'lax'
     }
 }
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -80,11 +89,16 @@ app.use((req , res , next) => {
 // const MONGO_URL = "mongodb://127.0.0.1:27017/Homelander"
 
 
-async function main(){
-    await mongoose.connect(dbUrl);
+async function main() {
+    try {
+        await mongoose.connect(dbUrl);
+        console.log("Connected to DB");
+    } catch (err) {
+        console.error("MongoDB connection error:", err);
+    }
 }
 
-
+main();
 
 app.get('/' , (req , res) => {
     res.render("listings/Hero.ejs");
@@ -98,9 +112,11 @@ app.all("*" , (req , res , next) => {
     next(new ExpressError(404 , "Page Not Found!"));
 });
 
-app.use((err , req , res , next) => {
-    let {statusCode , message} = err;
-    res.status(statusCode).render("error.ejs" , {err});
+app.use((err, req, res, next) => {
+    console.error(err);
+    let { statusCode = 500, message = "Something went wrong!" } = err;
+    if (!err.message) err.message = "Oh No, Something Went Wrong!";
+    res.status(statusCode).render("error.ejs", { err });
 });
 
 const port = process.env.PORT || 3000;
