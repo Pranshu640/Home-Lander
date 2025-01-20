@@ -101,7 +101,7 @@ async function main() {
 main();
 
 app.get('/' , (req , res) => {
-    res.render('/listings/login.ejs');
+    res.redirect('/listings');
 });
 
 app.use("/listings" , listingRouter);
