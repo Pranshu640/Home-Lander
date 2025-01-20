@@ -1,40 +1,32 @@
+/* Global Styles */
 body {
     background-color: rgb(32, 32, 32);
-    justify-content: center;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-nav{
-/* From https://css.glass */
-background: rgba(0, 0, 0, 0.31) !important;
-box-shadow: 0 4px 30px rgba(136, 136, 136, 0.1) !important;
-backdrop-filter: blur(7.1px) !important;
--webkit-backdrop-filter: blur(7.1px) !important;
-position: fixed !important;
+    justify-content: center;
 }
 
-
-
-footer>div{
-/* From https://css.glass */
-background: rgba(0, 0, 0, 0.31) !important;
-box-shadow: 0 4px 30px rgba(255, 255, 255, 0.349) !important;
-backdrop-filter: blur(7.1px) !important;
--webkit-backdrop-filter: blur(7.1px) !important;
+/* Typography */
+p, h1, h2, h3, h4, label, i {
+    color: #f0f0f0;
 }
 
-
-
-
-
+/* Layout */
 ._container { 
     flex: 1;
-    margin: 1rem;
-    margin-left: 3rem;
-    padding: 2rem;
-    padding-top: 0;
+    margin: 1rem 3rem 1rem 3rem;
+    padding: 0 2rem 2rem 2rem;
     margin-top: 7rem;
+}
+
+/* Navigation */
+nav {
+    background: rgba(0, 0, 0, 0.31) !important;
+    backdrop-filter: blur(7.1px) !important;
+    -webkit-backdrop-filter: blur(7.1px) !important;
+    box-shadow: 0 4px 30px rgba(136, 136, 136, 0.1) !important;
+    position: fixed !important;
 }
 
 .navbar {
@@ -42,9 +34,38 @@ backdrop-filter: blur(7.1px) !important;
     background-color: rgb(255, 255, 255);
 }
 
-
 .nav-link {
     color: #f0f0f0 !important;
+}
+
+/* Footer */
+footer {
+    margin: 0;
+}
+
+footer > div {
+    background: rgba(0, 0, 0, 0.31) !important;
+    backdrop-filter: blur(7.1px) !important;
+    -webkit-backdrop-filter: blur(7.1px) !important;
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.349) !important;
+}
+
+.f-info {
+    display: flex;
+    height: 8rem;
+    background-color: #f0f0f0;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-between;
+    text-align: center;
+}
+
+.f-info > div {
+    color: white;
+}
+
+.f-info-links {
+    width: 100%;
 }
 
 .f-info-links a {
@@ -54,10 +75,6 @@ backdrop-filter: blur(7.1px) !important;
 
 .f-info-links a:hover {
     text-decoration: underline;
-}
-
-.f-info-links {
-    width: 100%;
 }
 
 .f-info-socials {
@@ -70,137 +87,113 @@ backdrop-filter: blur(7.1px) !important;
 
 .f-info-socials i {
     margin-right: 1rem;
-    color: white;
 }
 
-.f-info > div{
-    color: white;
-}
-
-.f-info {
-    text-align: center;
-    display: flex;
-    height: 8rem;
-    background-color: #f0f0f0;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-between;
-}
-
-/* cards */
+/* Card Styles */
 .listing-card {
-    padding: 0;
     border: none !important;
-    margin-bottom: 2rem;
-    margin-right: 1rem;
-    width: 25rem !important;
-
-}
-
-.card img {
+    margin: 0 1rem 2rem 0;
     padding: 0;
-    width: 100%;
-}
-
-.row {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.card-body{
-    position: relative;
-}
-
-details{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 0.5rem;
-}
-
-.card:hover{
-    filter: drop-shadow(0.5px 0.5px 10px #ffffff4d);
-}
-
-#row{
-    display: block;
-}
-
-footer{
-    margin: 0;
-}
-
-.show-img{
-    width: 40vw;
-    height: 60vh;
-    border-radius: 20px;
-}
-.show-display{
-    display: flex;
-    column-gap: 1rem;
-    width: 80vw;
-    justify-content: space-between;
-}
-
-.right{
-    align-self: center;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    row-gap: 2rem;
-    border-radius: 20px;
-    width: 30rem;
-
-    background-color: #5f5f5f;
-    filter: drop-shadow(0.5px 0.5px 10px #ffffff4d);
-    padding: 2rem;
-}
-.right>h4{
-    font-weight: normal;
-    justify-self: center;
-}
-
-.show-options>form{
-    display: inline;
-}
-
-.show-options>form>button{
-    height: 4.5rem;
-    width: 9rem;
-    margin: 0.5rem;
-}
-
-#listing-details{
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.bento {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    grid-auto-rows: minmax(10rem, auto);
-}
-
-.review{
-    justify-self: center;
-    width: 30rem;
-    height: fit-content;
-}
-
-p,h1,h2,h3,h4,label {
-    color: #f0f0f0;
+    width: 25rem !important;
 }
 
 .listing-card > img {
     border-radius: 20px;
 }
 
-.review > .card-body > p{
+.card img {
+    width: 100%;
+    padding: 0;
+}
+
+.card:hover {
+    filter: drop-shadow(0.5px 0.5px 10px #ffffff4d);
+}
+
+.card-body {
+    position: relative;
+}
+
+/* Show Page Styles */
+.show-display {
+    display: flex;
+    width: 80vw;
+    column-gap: 1rem;
+    justify-content: space-between;
+}
+
+.show-img {
+    width: 40vw;
+    height: 60vh;
+    border-radius: 20px;
+}
+
+.right {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    row-gap: 2rem;
+    padding: 2rem;
+    text-align: center;
+    background-color: #5f5f5f;
+    border-radius: 20px;
+    filter: drop-shadow(0.5px 0.5px 10px #ffffff4d);
+}
+
+.right > h4 {
+    font-weight: normal;
+    justify-self: center;
+}
+
+/* Review Styles */
+.review {
+    justify-self: center;
+    width: 30rem;
+    height: fit-content;
+}
+
+.review > .card-body > p {
     color: #6d6d6d;
 }
 
+/* Utility Classes */
+.row {
+    display: flex;
+    justify-content: space-evenly;
+}
 
-i {
-    color: white;
+#row {
+    display: block;
+}
+
+details {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0.5rem;
+}
+
+#listing-details {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Grid Layout */
+.bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(10rem, auto);
+    gap: 10px;
+}
+
+/* Button Styles */
+.show-options > form {
+    display: inline;
+}
+
+.show-options > form > button {
+    height: 4.5rem;
+    width: 9rem;
+    margin: 0.5rem;
 }

@@ -4,20 +4,24 @@
     margin-right: 0.25rem;
     display: inline;
   }
+  .h3{
+    color: white;
+    justify-self: baseline;
+        font-family: "Bebas Neue", serif;
+  font-weight: 400;
+  font-style: normal;
+       margin-top: 1.3rem;
+  }
 </style>
 
 
 <nav class="navbar navbar-expand-md bg-body-light fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img src="/images/HomeLanderLogo.png" style="height: 50px; width: 50px;"></a>
+      <a class="navbar-brand" href="/"><h3>HOMELANDER</h3></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
-        <div class="navbar-nav">
-          <a class="nav-link" href="/listings">Explore</a>
-        </div>
 
         <div class="navbar-nav ms-auto">
         <form class="d-flex" role="search">
@@ -27,6 +31,7 @@
 
         </div>
         <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="/listings">Explore</a>
           <a class="nav-link" href="/listings/new">Add new Home</a>
           <% if(!curuser){%>
           <a class="nav-link"href="/signup"><b>Sign up</b></a>
