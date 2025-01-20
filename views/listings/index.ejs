@@ -1,0 +1,112 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .filter {
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 0.5rem ;
+        opacity: 0.75;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+        
+    }
+
+    #filters { 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .nirmala{
+        display: none;
+    }
+
+    .NIRMALA{
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 1rem;
+        height: 3.5rem;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+<div id="filters">
+    <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain-sun"></i></div>
+        <p>Hilly</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-umbrella-beach"></i></div>
+        <p>Beach</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-city"></i></div>
+        <p>City</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-ship"></i></div>
+        <p>Boat House</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing waters</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <p>Old Timer</p>
+    </div>
+    <div class="NIRMALA">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+          </div>
+    </div>
+</div>
+
+<body>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <% for (let listing of alllisiting) { %>
+        <div class="listing-card col" style="width: 20rem;"><
+            <img src="<%= listing.image.url%>" class="card-img-top cdimg" alt="..." style="height: 20rem;">
+            <div class="card-body">
+                <h3><%= listing.title %></h3>
+                <p class="card-text"><%= listing.description %></p>
+                <p>&#8377;<%= listing.price.toLocaleString() %>/night 
+                    <i class="nirmala">&nbsp;+&#8377;<%= 0.18*listing.price%> GST</i>
+                </p>
+                <form method="get" action="/listings/<%= listing._id %>" class="details">
+                    <button class="btn btn-success">See Details</button>
+                </form>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</body>
+
+<script>
+    let NIRMALAA = document.getElementById("flexSwitchCheckDefault");
+    NIRMALAA.addEventListener("click" , () => {
+        let nirmala = document.getElementsByClassName("nirmala");
+        for (nirma of nirmala){
+            if (nirma.style.display != "inline"){
+                nirma.style.display = "inline";
+            }else{
+                nirma.style.display = "none"
+            }
+        }
+    })
+</script>
+
