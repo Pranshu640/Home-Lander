@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsmate = require("ejs-mate");
-const helmet = require('helmet');
 const fs = require('fs');
 
 const ExpressError = require("./utils/ExpressError.js");
@@ -30,14 +29,10 @@ app.engine("ejs" , ejsmate);
 app.use(express.static(path.join(__dirname , "/public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(helmet());
 
-app.use(
-    helmet({
-        contentSecurityPolicy: false,
-        crossOriginEmbedderPolicy: false,
-    })
-);
+const viewsPath = path.join(__dirname, "views");
+console.log("Views directory exists:", fs.existsSync(viewsPath));
+console.log("Users directory exists:", fs.existsSync(path.join(viewsPath, "users")));
 
 const dbUrl = process.env.ATLASDB_URL;
 
@@ -49,12 +44,14 @@ main().then(() => {
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
-    secret: process.env.SECRET,
+    crypto : {
+        secret : process.env.SECRET,
+    },
     touchAfter: 24 * 60 * 60
 });
-
-store.on("error", (err) => {
-    console.log("Error in mongo session store", err);
+ 
+store.on("error" , (err) => {
+    console.log("Error in mongo session store" , err);
 });
 
 const sessionOptions = {
@@ -65,8 +62,6 @@ const sessionOptions = {
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7,
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: 'lax'
     }
 }
 
@@ -124,9 +119,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-const viewsPath = path.join(__dirname, "views");
-console.log("Views directory exists:", fs.existsSync(viewsPath));
-console.log("Users directory exists:", fs.existsSync(path.join(viewsPath, "Users")));
-
-
