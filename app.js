@@ -101,7 +101,7 @@ async function main() {
 main();
 
 app.get('/' , (req , res) => {
-    res.render("listings/Hero.ejs");
+    res.render('users/login.ejs');
 });
 
 app.use("/listings" , listingRouter);
