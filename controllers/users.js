@@ -1,6 +1,7 @@
 const User = require('../models/user.js');
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
+const path = require('path');
 
 module.exports.rendercreate =  (req,res) => {
     res.render('users/signup.ejs');
@@ -25,7 +26,9 @@ module.exports.create = async(req,res) => {
     }
 };
 
-module.exports.renderlogin =  (req , res) => {
+module.exports.renderlogin = (req, res) => {
+    console.log("Views path:", path.join(__dirname, '../views'));
+    console.log("Current directory:", __dirname);
     res.render('users/login.ejs');
 };
 

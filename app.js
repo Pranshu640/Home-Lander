@@ -8,6 +8,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsmate = require("ejs-mate");
 const helmet = require('helmet');
+const fs = require('fs');
 
 const ExpressError = require("./utils/ExpressError.js");
 const listingRouter = require("./routes/listing.js");
@@ -123,5 +124,9 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+const viewsPath = path.join(__dirname, "views");
+console.log("Views directory exists:", fs.existsSync(viewsPath));
+console.log("Users directory exists:", fs.existsSync(path.join(viewsPath, "users")));
 
 
