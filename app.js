@@ -97,7 +97,7 @@ async function main() {
 main();
 
 app.get('/' , (req , res) => {
-    res.redirect('/listings');
+    res.render('listings/Hero.ejs');
 });
 
 app.use("/listings" , listingRouter);
