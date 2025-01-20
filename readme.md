@@ -119,16 +119,10 @@ Pranshu Bansal - [pranshubansal640@gmail.com](mailto:pranshubansal640@gmail.com)
 
 Project Link: [https://github.com/Pranshu640/Home-Lander](https://github.com/Pranshu640/Home-Lander)
 
-## Screenshots 📸
-
-[Add screenshots of your application here]
-
 ## Deployment 🚀
 
 https://home-lander-jsge.onrender.com
 
 ## Acknowledgments 👏
-
-- Thanks to all contributors who have helped shape Home-Lander
 - Built with inspiration from modern real estate platforms
 - Special thanks to the open-source community
