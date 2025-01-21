@@ -34,7 +34,7 @@ const viewsPath = path.join(__dirname, "views");
 console.log("Views directory exists:", fs.existsSync(viewsPath));
 console.log("Users directory exists:", fs.existsSync(path.join(viewsPath, "users")));
 
-const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/Homelander";
 
 main().then(() => {
     console.log("connected to DB");
