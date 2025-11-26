@@ -87,7 +87,10 @@ app.use((req , res , next) => {
 
 async function main() {
     try {
-        await mongoose.connect(dbUrl);
+        await mongoose.connect(dbUrl, {
+            tls: true,
+            tlsAllowInvalidCertificates: false,
+        });
         console.log("Connected to DB");
     } catch (err) {
         console.error("MongoDB connection error:", err);
@@ -96,6 +99,7 @@ async function main() {
 
 main();
 
+// Root route moved after middleware
 app.get('/' , (req , res) => {
     res.render('listings/Hero.ejs');
 });
@@ -117,12 +121,10 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 3000;
 
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
-}
+// Start server (for Render and local development)
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
 
 // Export for Vercel
 module.exports = app;

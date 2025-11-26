@@ -6,8 +6,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node --no-deprecation app.js",
-    "dev": "nodemon --no-deprecation app.js",
+    "start": "NODE_OPTIONS='--no-deprecation --tls-min-v1.0' node app.js",
+    "dev": "NODE_OPTIONS='--no-deprecation --tls-min-v1.0' nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -27,7 +27,7 @@
     "helmet": "^8.0.0",
     "joi": "^17.13.3",
     "method-override": "^3.0.0",
-    "mongoose": "^8.8.3",
+    "mongoose": "^8.0.0",
     "multer": "^2.0.2",
     "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.7.0",
